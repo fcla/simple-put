@@ -8,5 +8,5 @@ end
 
 desc "deploy to to ripple c3 (https)"
 task :c3 do
-    sh "cap deploy -S target=ripple:/opt/web-services/sites/simple-put"
+    sh "cap deploy -S target=ripple:/opt/web-services/sites/simple-put2"
 end
