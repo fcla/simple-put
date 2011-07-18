@@ -18,7 +18,7 @@ filename = ARGV[0]
 io = open filename
 
 http = Curl::Easy.new ADDRESS
-# http.headers = {"Content-Type" => "text/plain",  "Content-Length" => 5 }
+http.headers = {"Content-Type" => "application/octet-stream", "Connection" => "close")
 
 http.http_put io
 puts "status: #{http.response_code}"

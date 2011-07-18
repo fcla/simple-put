@@ -4,7 +4,7 @@ require 'rubygems'
 require 'railsless-deploy'
 
 set :scm,          "git"
-set :repository,   "git://github.com/grf/simple-put.git"
+set :repository,   "git://github.com/daitss/simple-put.git"
 set :branch,       "master"
 
 set :use_sudo,     false

@@ -34,7 +34,7 @@ http.read_timeout = READ_TIMEOUT
 request = Net::HTTP::Put.new(ADDRESS.request_uri)
 io.rewind if io.respond_to?('rewind')
 request.body_stream = io
-request.initialize_http_header("Content-Length" => File.stat(filename).size.to_s)
+request.initialize_http_header('Content-Length' => File.stat(filename).size.to_s, 'Content-Type' => 'application/octet-stream')
 request.basic_auth(ADDRESS.user, ADDRESS.password) if ADDRESS.user or ADDRESS.password
 
 response = http.request(request)
