@@ -41,7 +41,7 @@ put '/:name' do |name|
   sha1 = Digest::SHA1.new
 
   size = 0
-  while buff = data.read(4 * 1024)
+  while buff = data.read(4 * 1024 * 1024)
     size += buff.length
     md5 << buff
     sha1 << buff
