@@ -1,0 +1,25 @@
+#!/usr/bin/env  ruby
+# -*- mode:ruby; -*-
+
+# just like put (net/https based) but we use the curb library
+
+require 'uri'
+require 'curb'
+
+ADDRESS = 'https://c2.ripple.fcla.edu/data'
+
+if not ARGV[0]
+  STDERR.puts  "Usage: #{$0} filename"
+  exit 0
+end
+
+filename = ARGV[0]
+
+io = open filename
+
+http = Curl::Easy.new ADDRESS
+# http.headers = {"Content-Type" => "text/plain",  "Content-Length" => 5 }
+
+http.http_put io
+puts "status: #{http.response_code}"
+puts http.body_str

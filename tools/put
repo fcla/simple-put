@@ -1,0 +1,33 @@
+#!/usr/bin/env  ruby
+# -*- mode:ruby; -*-
+
+require 'uri'
+require 'net/https'
+
+OPEN_TIMEOUT = 60 * 60 * 2
+READ_TIMEOUT = 60 * 60 * 2
+
+ADDRESS = URI.parse 'https://c2.ripple.fcla.edu/data'
+
+if not ARGV[0]
+  STDERR.puts  "Usage: #{$0} filename"
+  exit 0
+end
+
+
+filename = ARGV[0]
+
+http = Net::HTTP.new(ADDRESS.host, ADDRESS.port)
+http.use_ssl = ADDRESS.scheme == 'https'
+http.open_timeout = OPEN_TIMEOUT
+http.read_timeout = READ_TIMEOUT
+
+request = Net::HTTP::Put.new(ADDRESS.request_uri)
+request.body_stream = open(filename)
+request.initialize_http_header("Content-Length" => File.stat(filename).size.to_s)
+request.basic_auth(ADDRESS.user, ADDRESS.password) if ADDRESS.user or ADDRESS.password
+
+response = http.request(request)
+
+puts "status: #{response.code}"
+puts response.body
