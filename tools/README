@@ -1,0 +1,9 @@
+
+cput	use curb library to send file to ripple ssl server (c2.ripple.fcla.edu)
+put	use net/https to send file to ripple ssl server (c2.ripple.fcla.edu)
+pput    use plain net/http to send file to ripple non-ssl server (c3.ripple.fcla.edu)
+
+currently: cput works for large files - 34 GB
+
+put and pput fail for files of size 25 GB - doesn't make sense, since
+I'm using the pput techniques now for silo and storemaster...
