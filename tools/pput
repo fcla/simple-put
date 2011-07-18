@@ -5,7 +5,8 @@
 # the appropirate thing to send to.
 
 require 'uri'
-require 'net/https'
+# require 'net/https'
+require 'net/http'
 
 OPEN_TIMEOUT = 60 * 60 * 2
 READ_TIMEOUT = 60 * 60 * 2
@@ -22,7 +23,11 @@ filename = ARGV[0]
 io = open filename
 
 http = Net::HTTP.new(ADDRESS.host, ADDRESS.port)
-http.use_ssl = ADDRESS.scheme == 'https'
+
+if http.respond_to? :use_ssl
+   http.use_ssl = ADDRESS.scheme == 'https'
+end
+
 http.open_timeout = OPEN_TIMEOUT
 http.read_timeout = READ_TIMEOUT
 
